@@ -155,18 +155,6 @@ rental-inventory/
 
 ---
 
-## 🗺️ Roadmap
-
-- [ ] Pagination on equipment and request tables
-- [ ] Multi-item requests — one request covering multiple equipment items
-- [ ] Calendar view for scheduling and availability conflicts
-- [ ] Barcode / QR code scanning for checkout and return
-- [ ] XLSX import via PhpSpreadsheet (currently CSV only)
-- [ ] Dark mode support
-- [ ] Student ID card integration for authentication
-
----
-
 ## 🤝 Contributing
 
 This is an academic project, but feedback and suggestions are welcome.
