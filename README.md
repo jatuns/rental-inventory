@@ -1,23 +1,51 @@
 # 🎬 Rental Inventory System
 
-A web-based equipment rental management system developed for the **Communication and Design Department at Bilkent University**. This system allows students to request equipment rentals, instructors to manage approvals, and administrators to oversee the entire inventory.
+<div align="center">
+
+![PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-5.7%2B-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Academic%20Project-2563eb?style=for-the-badge)
+
+**A web-based equipment rental management system for the Communication and Design Department at Bilkent University.**
+
+[Features](#-features) · [Installation](#-installation--setup) · [User Roles](#-user-roles) · [Roadmap](#️-roadmap)
+
+</div>
 
 ---
 
-## 📌 About the Project
+## 📖 About the Project
 
-This project was built as part of a course requirement for the **Communication and Design (COMD) Department at Bilkent University**. The goal was to design and develop a functional inventory management system that streamlines the process of borrowing and returning departmental equipment such as cameras, audio gear, and other production tools.
+The **Rental Inventory System** is a full-stack web application designed to digitize and streamline the process of borrowing departmental production equipment — cameras, audio gear, lighting rigs, drones, and more — at Bilkent University's Communication and Design (COMD) Department.
+
+Before this system, equipment requests were handled manually, leading to scheduling conflicts, unclear approval chains, and difficulty tracking equipment status. This project addresses those problems through:
+
+- A **structured two-stage approval workflow** involving course instructors and the department chair
+- **Real-time equipment status tracking** (available, checked out, maintenance, retired)
+- **Role-based access control** so each stakeholder sees only what is relevant to them
+- **Email notifications** at every stage of the request lifecycle
+- A **comprehensive admin panel** for full oversight of users, equipment, and borrow history
+
+> **Note:** This project was developed as a course requirement for the COMD department at Bilkent University and is intended for instructor review and demonstration purposes. It is not deployed to a live server.
 
 ---
 
 ## ✨ Features
 
-- 🔐 **Role-based authentication** — Separate dashboards for Admin, Instructor, Chair, and Student
-- 📦 **Equipment management** — Browse available items by category with images
-- 📋 **Rental requests** — Students can submit, edit, and cancel requests
-- ✅ **Approval workflow** — Instructors and chairs review and approve/reject requests
-- 👤 **User profiles** — Each user has a personal profile page
-- 📊 **Admin dashboard** — Full control over users, equipment, and categories
+| Feature | Description |
+|---|---|
+| 🔐 Role-based Auth | Separate dashboards and permissions for Admin, Chair, Instructor, and Student |
+| 📦 Equipment Catalog | Browse items by category with images, specs, and availability status |
+| 📋 Rental Requests | Students submit requests; instructors and chairs approve or reject with comments |
+| ✅ Two-stage Approval | Requests require sign-off from both the course instructor and department chair |
+| 🔔 Notifications | Automated email alerts on approval, rejection, and item availability |
+| 📊 Admin Dashboard | Full control over users, equipment, categories, courses, and borrow history |
+| 📥 CSV Import | Bulk import equipment records from Excel/CSV files |
+| 👤 User Profiles | Each user can update their profile and change their password |
+| 📅 Overdue Tracking | Checked-out items past their due date are highlighted automatically |
+| 🔍 Guest Browsing | Anyone can browse the equipment catalog without logging in |
 
 ---
 
@@ -25,10 +53,11 @@ This project was built as part of a course requirement for the **Communication a
 
 | Technology | Purpose |
 |---|---|
-| PHP | Backend logic |
-| MySQL | Database |
-| Bootstrap 5 | Frontend UI |
+| PHP 7.4+ | Backend logic and server-side rendering |
+| MySQL 5.7+ | Relational database |
+| Bootstrap 5.3 | Responsive frontend UI |
 | Bootstrap Icons | Icon library |
+| Vanilla JS | Client-side interactions |
 
 ---
 
@@ -37,6 +66,7 @@ This project was built as part of a course requirement for the **Communication a
 > This project requires a local server environment such as **XAMPP** or **MAMP**.
 
 ### Prerequisites
+
 - PHP 7.4 or higher
 - MySQL 5.7 or higher
 - XAMPP / MAMP / any local PHP server
@@ -45,7 +75,7 @@ This project was built as part of a course requirement for the **Communication a
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/rental-inventory.git
+   git clone https://github.com/jatuns/rental-inventory.git
    ```
 
 2. **Move to your server's root folder**
@@ -61,28 +91,37 @@ This project was built as part of a course requirement for the **Communication a
 
 4. **Configure the database connection**
    - Duplicate `config/database.example.php` and rename it to `database.php`
-   - Update with your local credentials:
+   - Fill in your local credentials:
    ```php
-   $host = 'localhost';
-   $dbname = 'rental_inventory';
-   $username = 'root';
-   $password = '';
+   define('DB_HOST', 'localhost');
+   define('DB_NAME', 'rental_inventory');
+   define('DB_USER', 'root');
+   define('DB_PASS', '');
    ```
 
-5. **Run the project**
-   - Start Apache and MySQL in XAMPP
+5. **Start the server**
+   - Start Apache and MySQL via XAMPP
    - Visit: `http://localhost/rental-inventory`
+
+### Demo Credentials
+
+| Role | Email | Password |
+|---|---|---|
+| Admin | admin@university.edu | password |
+| Chair | chair@university.edu | password |
+| Instructor | instructor@university.edu | password |
+| Student | student@university.edu | password |
 
 ---
 
 ## 👥 User Roles
 
-| Role | Description |
+| Role | Capabilities |
 |---|---|
-| **Admin** | Manages all users, equipment, and categories |
-| **Chair** | Reviews and approves rental requests at department level |
-| **Instructor** | Approves student requests within their courses |
-| **Student** | Browses equipment and submits rental requests |
+| **Admin** | Full access — manages users, equipment, categories, courses, checkout/return |
+| **Chair** | Reviews and approves/rejects all rental requests at department level |
+| **Instructor** | Approves student requests linked to their own courses |
+| **Student** | Browses equipment, submits requests, tracks approval status, cancels pending requests |
 
 ---
 
@@ -90,19 +129,64 @@ This project was built as part of a course requirement for the **Communication a
 
 ```
 rental-inventory/
-├── admin/          # Admin panel pages
-├── instructor/     # Instructor dashboard
-├── chair/          # Chair dashboard
-├── student/        # Student dashboard
-├── guest/          # Guest/public pages
-├── config/         # Database configuration & SQL
-├── includes/       # Shared functions and auth
-├── assets/         # CSS, JS, images
-├── uploads/        # User-uploaded equipment images
-├── index.php       # Landing page & login
-├── profile.php     # User profile page
-└── logout.php      # Logout handler
+├── admin/              # Admin panel (dashboard, equipment, users, requests, checkout, courses, import)
+├── instructor/         # Instructor dashboard and approval interface
+├── chair/              # Department chair dashboard and approval interface
+├── student/            # Student dashboard, new request, edit, cancel
+├── guest/              # Public equipment browsing (no login required)
+├── config/
+│   ├── database.example.php   # DB config template
+│   └── database.sql           # Full schema + seed data
+├── includes/
+│   ├── auth.php        # Login, logout, session, role checks
+│   ├── functions.php   # Email, formatting, upload, status helpers
+│   ├── header.php      # Shared HTML header + navbar
+│   └── footer.php      # Shared HTML footer
+├── assets/
+│   ├── css/style.css   # Custom stylesheet
+│   ├── js/main.js      # Client-side JS
+│   └── images/         # Static assets
+├── uploads/            # User-uploaded equipment images (gitignored)
+├── index.php           # Landing page + login
+├── profile.php         # User profile and password change
+├── subscribe.php       # Availability notification handler
+└── logout.php          # Session destroy + redirect
 ```
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Pagination on equipment and request tables
+- [ ] Multi-item requests — one request covering multiple equipment items
+- [ ] Calendar view for scheduling and availability conflicts
+- [ ] Barcode / QR code scanning for checkout and return
+- [ ] XLSX import via PhpSpreadsheet (currently CSV only)
+- [ ] Dark mode support
+- [ ] Student ID card integration for authentication
+
+---
+
+## 🤝 Contributing
+
+This is an academic project, but feedback and suggestions are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Commit your changes
+   ```bash
+   git commit -m "Add: your feature description"
+   ```
+4. Push to your branch
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. Open a Pull Request and describe what you changed and why
+
+Please keep commits focused and PRs small — one feature or fix per PR.
 
 ---
 
@@ -111,9 +195,16 @@ rental-inventory/
 > **Institution:** Bilkent University  
 > **Department:** Communication and Design (COMD)  
 > **Project Type:** Course Project  
+> **Purpose:** Developed for educational purposes; intended for instructor review, not live deployment
+
+---
+
+## 👤 Author
+
+**Barış** — [@jatuns](https://github.com/jatuns)
 
 ---
 
 ## 📄 License
 
-This project was developed for educational purposes at Bilkent University. All rights reserved.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
